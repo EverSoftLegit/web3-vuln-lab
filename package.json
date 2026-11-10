@@ -1,0 +1,15 @@
+{
+  "name": "web3-vuln-lab",
+  "version": "1.0.0",
+  "description": "Deliberately vulnerable smart contracts for learning to find and fix Web3 vulnerabilities. Local test chains only.",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "dependencies": {
+      "ethers": "^6.17.0",
+      "ganache": "^7.9.2",
+      "solc": "0.8.26"
+  }
+}

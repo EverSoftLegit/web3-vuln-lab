@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-exploit-tests:
+    # Compiles the contracts (solc-js, offline) and runs each exploit against a
+    # local in-process EVM: every vulnerable contract must be drainable and every
+    # fixed contract must resist.
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm test
