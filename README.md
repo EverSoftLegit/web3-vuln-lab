@@ -48,6 +48,12 @@ CI runs the same thing on Node 20 and 22 on every push.
 3. Compare the `Vulnerable…` and `Secure…` contracts to see the one change that closes the hole.
 4. Run `npm test` and watch the exploit drain the vulnerable contract and bounce off the fixed one.
 
+## A note on `npm audit`
+
+`npm install` reports advisories (several high/critical) in the **test-only dev dependencies** — chiefly `ganache`, which is deprecated and drags in an old transitive tree. None of this is part of the lab's product: the deliverable is the Solidity in `contracts/`, and `npm ci --omit=dev` installs nothing, so nothing here is shipped or deployed. The advisories live in local tooling used to run the exploit tests.
+
+The clean long-term fix is to migrate the harness off `ganache` to **Foundry** or **Hardhat**; that's the planned v2. Until then the tradeoff is explicit here rather than hidden.
+
 ## Scope and intent
 
 This exists to train developers and auditors to find and fix these bugs. The contracts are classic teaching examples (mapped to the [SWC Registry](https://swcregistry.io/) and covered in every smart-contract security course), they run only on a local test chain, and each ships with its fix. It is not tooling aimed at any live contract, and nothing here should be deployed.
